@@ -33,3 +33,12 @@ You must have CodeIgniter, Now just copy and paste the files into the CodeIgnito
 
 Now, That you have copied all files to the appropriate directories in CodeIgniter Framework, Its time for a little coding
 
+From Codeigniter's directory, Open `application/config.autoload.php` and locate a line like below one
+
+`$autoload['libraries'] = array();`
+
+Type `theme` in the `array()` so your could should look like 
+
+`$autoload['libraries'] = array('theme');`
+
+
