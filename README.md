@@ -41,4 +41,18 @@ Type `theme` in the `array()` so your could should look like
 
 `$autoload['libraries'] = array('theme');`
 
+after this, Look below in the `config.php` file until you find 
 
+`$autoload['helper'] = array();`
+
+like above, type `theme` in the helper's `array()` like 
+
+`$autoload['helper'] = array('theme');`
+
+A little below of that line in `config.php` file, you should find 
+
+`$autoload['config'] = array();`
+
+We have to put `'theme'` in the array of configs too so your line should look like
+
+`$autoload['config'] = array('theme');`
