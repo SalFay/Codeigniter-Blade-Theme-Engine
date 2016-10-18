@@ -56,3 +56,24 @@ A little below of that line in `config.php` file, you should find
 We have to put `'theme'` in the array of configs too so your line should look like
 
 `$autoload['config'] = array('theme');`
+
+_Note:_ we are using [duncan3dc/blade](https://github.com/duncan3dc/blade) which is a standalone package of Blade.
+
+If you are using `Composer` with Codeigniter the you have to just run the following command from composer within your codeigniter's directory
+
+`composer require duncan3dc/blade`
+
+If you are not using Composer, Download that package and put it in your Codeigniter's root directory whereever you like, Just remember the path and of course, Run `composer install` so that the package dependencies become available to the Blade package
+
+Now, from the CodeIgniter's directory, Open `application/config/theme.php`
+
+You should see the following line
+
+`$config['blade_engine'] = FCPATH.'vendor/blade/vendor/autoload.php';`
+
+If you are using Composer and installed the Blade package via composer, you should leave it empty or as is. Otherwise, please put the Path to the autoloader of the blade package.
+
+_Tip:_ Create a directory `vendor` in your Codeigniter's root and put the downloaded duncan3dc/blade package in that directory with name `blade`, RUn `composer install` from that directory and you are ready to go with that default path.
+
+After installing and configuring everything, Its time to create out theme directory structure and setup our theme
+
