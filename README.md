@@ -1,79 +1,89 @@
 # Codeigniter-Blade-Theme-Engine
 This library integrates Laravel's Blad Engine into Codeigniter with a theming functionality so you are not only limited to displaying views in the traditional CI style but it gives you the power to have as many themes as you want in one CI installation and you can switch themes anytime and anywhere you want.
 
-## Installation
-First off, Grab [Clone/Download](https://github.com/SalFay/Codeigniter-Blade-Theme-Engine/archive/master.zip) a fresh copy of this library and unzip it.
-You will get a directory structure similar to this
+### Installation
+1. Clone/Download this repository.
+2. Copy all files to your CodeIgniter folder.
+3. Open ```application/config/autoload.php```
+4. Add ```theme``` to the following arrays 
+	``` php 
+	$autoload['libraries'] = array('theme');
+	```
+	```php
+	$autoload['helper'] = array('theme','url');
+	```
+	```php
+	$autoload['config'] = array('theme');
+	```
+	
+#### Install Blade Package
+We are using [duncan3dc/blade](https://github.com/duncan3dc/blade) which is a standalone package of Blade.
+So Install the said package via Composer by issuing this command
+```bash
+composer require duncan3dc/blade
+```
 
-- application
-    - libraries
-        - Theme.php
-    - config
-        - theme.php
-    - helpers
-        - theme_helper.php
+Make sure you have Configured Using Composer with your CodeIgniter in ```config.php``` file
 
-You must have CodeIgniter, Now just copy and paste the files into the CodeIgnitor's Directoy like below.
+### Configuration
+1. Create a Directory ```themes``` in your CodeIgniter's root directory
+2. You are free to Change the name of ```themes``` directory
+3. Create ```default``` directory in the ```themes``` directory
+4. Open ```application/config/theme.php```
+5. You can see some Configuration items.
+6. If you have changed the name of ```themes``` directory, configure that in 
+	```php
+	$config['theme_directory'] = FCPATH.'themes'.DIRECTORY_SEPARATOR;
+	```
+7. If you have changed the sub directory of themes from ```default``` to something else, Configure that in
+	```php
+	$config['theme_default'] = 'default';
+	```
+	
+### Usage
+In the ```application/config/theme.php``` file, You have configured the default theme name.
+Which will be used as your default directory where the library will look for views/template files.
 
-- From Downloaded Package
-    - application/libraries/Theme.php
-- to CodeIgniter
-    - application/libraries/Theme.php
+Go to ```themes/default``` directory and create ```welcome.blade.php``` file.
 
-- From Downloaded Package
-    - application/config/theme.php
-- to Codeigniter
-    - application/config/theme.php
-    
-- From Downloaded Package
-    - application/helpers/theme_helper.php
-- to CodeIgniter
-    - application/helpers/theme.php
-    
+Paste the following Text in that file.
+```html
+<DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{{$page_title}} - CodeIgniter</title>	
+</head>
+<body>
+<h1>Welcome {{$person}}!</h1>
+</body>
+</html>
+```
+Now in your controller, do the following
+```php
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-Now, That you have copied all files to the appropriate directories in CodeIgniter Framework, Its time for a little coding
+class Welcome extends CI_Controller {
 
-From Codeigniter's directory, Open `application/config.autoload.php` and locate a line like below one
+	public function index()
+	{
+	    $view_data = array(
+	        	'page_title' => 'Blade template Engine came to CodeIgniter',
+			'person_name' => 'Fayaz Khan'
+        	);
+		$this->theme->display('welcome',$view_data);
+	}
+}
 
-`$autoload['libraries'] = array();`
+```
 
-Type `theme` in the `array()` so your could should look like 
 
-`$autoload['libraries'] = array('theme');`
+That's it, Navigate to ```/welcome``` and you will see the Blade template engine working the way you want,
 
-after this, Look below in the `config.php` file until you find 
+### Documentation
+You can find usage and all documentation of Blade Template engine @ [Laravel Official Website](https://laravel.com/docs/5.3/blade)
 
-`$autoload['helper'] = array();`
+### Contribution, Feedback and suggestions
+This is the initial version of blade theming engine. I am looking forward to see your feedback and suggestions. I will be adding more features to this library as I get free time.
 
-like above, type `theme` in the helper's `array()` like 
-
-`$autoload['helper'] = array('theme');`
-
-A little below of that line in `config.php` file, you should find 
-
-`$autoload['config'] = array();`
-
-We have to put `'theme'` in the array of configs too so your line should look like
-
-`$autoload['config'] = array('theme');`
-
-_Note:_ we are using [duncan3dc/blade](https://github.com/duncan3dc/blade) which is a standalone package of Blade.
-
-If you are using `Composer` with Codeigniter the you have to just run the following command from composer within your codeigniter's directory
-
-`composer require duncan3dc/blade`
-
-If you are not using Composer, Download that package and put it in your Codeigniter's root directory whereever you like, Just remember the path and of course, Run `composer install` so that the package dependencies become available to the Blade package
-
-Now, from the CodeIgniter's directory, Open `application/config/theme.php`
-
-You should see the following line
-
-`$config['blade_engine'] = FCPATH.'vendor/blade/vendor/autoload.php';`
-
-If you are using Composer and installed the Blade package via composer, you should leave it empty or as is. Otherwise, please put the Path to the autoloader of the blade package.
-
-_Tip:_ Create a directory `vendor` in your Codeigniter's root and put the downloaded duncan3dc/blade package in that directory with name `blade`, RUn `composer install` from that directory and you are ready to go with that default path.
-
-After installing and configuring everything, Its time to create out theme directory structure and setup our theme
-
+Happy Coding
