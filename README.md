@@ -54,7 +54,7 @@ Paste the following Text in that file.
 	<title>{{$page_title}} - CodeIgniter</title>	
 </head>
 <body>
-<h1>Welcome {{$person}}!</h1>
+<h1>Welcome {{$person_name}}!</h1>
 </body>
 </html>
 ```
