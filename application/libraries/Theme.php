@@ -1,4 +1,3 @@
-
 <?php
 use duncan3dc\Laravel\BladeInstance;
 
