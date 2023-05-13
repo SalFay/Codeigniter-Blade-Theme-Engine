@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | If you are not using composer
 | Enter Absolute path to the Blade autoloader.php file
 */
-$config['blade_engine'] = FCPATH.'vendor/blade/vendor/autoload.php';
+$config['blade_engine'] = FCPATH.'vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
